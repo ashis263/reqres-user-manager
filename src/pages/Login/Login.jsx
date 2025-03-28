@@ -5,12 +5,12 @@ import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 
 const Login = () => {
-    const { isAuthenticated, setIsAuthenticated, Toast } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, Toast, setIsLoading } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
 
     //if user is already authenticated, redirect to dashboard
-    if(isAuthenticated) {
-        return <Navigate to="/dashboard" />;
+    if (isAuthenticated) {
+        return <Navigate to="/userList" />;
     }
 
     //login form submission
@@ -27,6 +27,7 @@ const Login = () => {
                         title: 'Login successful'
                     });
                 }
+                setIsLoading(false);
             })
             .catch(() => {
                 Toast.fire({
