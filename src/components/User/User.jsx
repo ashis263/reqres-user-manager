@@ -1,7 +1,26 @@
-import React from 'react';
+import useAxiosPrivate from '../../hooks/useAxiosPrivate';
+import useAuth from '../../hooks/useAuth';
 
 const User = ({ user }) => {
-    const { avatar, first_name, last_name } = user;
+    const { Toast, users, setUsers } = useAuth(); 
+    const { id, avatar, first_name, last_name } = user;
+    const axiosPrivate = useAxiosPrivate();
+    const handleDelete = () => {
+        axiosPrivate.delete(`api/users/${id}`)
+            .then(response => {
+                if (response.status === 204) {
+                    const newUsers = users.filter(user => user.id !== id);
+                    setUsers(newUsers);
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'User deleted successfully'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
     return (
         <div className='flex items-center space-x-4 p-3 bg-gray-100 justify-center rounded-md'>
             {/* user avatar */}
@@ -21,7 +40,7 @@ const User = ({ user }) => {
                 {/* action buttons */}
                 <div className='w-full flex justify-between'>
                     <button className='btn btn-outline btn-xs sm:btn-sm text-teal-700 w-2/5'>Edit</button>
-                    <button className='btn btn-outline btn-xs sm:btn-sm text-red-500 w-2/5'>Delete</button>
+                    <button onClick={handleDelete} className='btn btn-outline btn-xs sm:btn-sm text-red-500 w-2/5'>Delete</button>
                 </div>
             </div>
         </div>

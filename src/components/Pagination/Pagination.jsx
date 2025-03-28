@@ -8,7 +8,6 @@ const Pagination = () => {
     const prevPage = () => {
         setCurrentPage(currentPage - 1);
     }
-    console.log(currentPage, totalPages);
     return (
         <div>
             <div className="flex justify-center gap-5 mt-5">
