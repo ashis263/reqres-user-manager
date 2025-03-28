@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
 import { AuthContext } from '../../providers/AuthProvider';
+import List from '../../components/List/List';
+import useAuth from '../../hooks/useAuth';
 
 const UserList = () => {
-    const { setIsAuthenticated } = useContext(AuthContext);
+    const { setIsAuthenticated } = useAuth();
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsAuthenticated(false);
@@ -13,7 +14,7 @@ const UserList = () => {
                 <button onClick={handleLogout} className="btn bg-teal-700 text-white btn-sm sm:btn-md">Logout</button>
             </div>
             <div className="bg-white rounded-lg shadow p-10 w-full">
-                
+                <List />
             </div>
         </div>
     );

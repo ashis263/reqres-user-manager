@@ -6,6 +6,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
+    const [users, setUsers] = useState([]);
 
     useEffect(() => {
         //get token from local storage
@@ -39,7 +40,9 @@ const AuthProvider = ({ children }) => {
         setIsAuthenticated,
         Toast,
         isLoading,
-        setIsLoading
+        setIsLoading,
+        users,
+        setUsers
     };
 
     return (

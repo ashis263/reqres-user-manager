@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAuth from "../../hooks/useAuth";
 
 const Login = () => {
-    const { isAuthenticated, setIsAuthenticated, Toast, setIsLoading } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, Toast, setIsLoading } = useAuth();
     const { handleSubmit, register } = useForm();
     const axiosPublic = useAxiosPublic();
 
