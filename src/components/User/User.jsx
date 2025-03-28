@@ -1,10 +1,14 @@
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const User = ({ user }) => {
-    const { Toast, users, setUsers } = useAuth(); 
+    const { Toast, users, setUsers } = useAuth();
     const { id, avatar, first_name, last_name } = user;
     const axiosPrivate = useAxiosPrivate();
+    const navigate = useNavigate();
+
+    //delete user
     const handleDelete = () => {
         axiosPrivate.delete(`api/users/${id}`)
             .then(response => {
@@ -21,10 +25,18 @@ const User = ({ user }) => {
                 console.error(error);
             });
     }
+
+    //edit user
+    const handleEdit = () => {
+        navigate(`/editUser/${id}`);
+    }
+
     return (
         <div className='flex items-center space-x-4 p-3 bg-gray-100 justify-center rounded-md'>
             {/* user avatar */}
-            <img src={avatar} className='border border-gray-400 w-1/2 rounded-sm' alt="user" />
+            <div className='w-1/2 aspect-square flex justify-center items-center'>
+                <img src={avatar} className='border w-full border-gray-400 rounded-sm' alt="user" />
+            </div>
             {/* first and last name */}
             <div className='flex flex-col justify-between w-1/2 h-full'>
                 <div className='space-y-2'>
@@ -39,7 +51,7 @@ const User = ({ user }) => {
                 </div>
                 {/* action buttons */}
                 <div className='w-full flex justify-between'>
-                    <button className='btn btn-outline btn-xs sm:btn-sm text-teal-700 w-2/5'>Edit</button>
+                    <button onClick={handleEdit} className='btn btn-outline btn-xs sm:btn-sm text-teal-700 w-2/5'>Edit</button>
                     <button onClick={handleDelete} className='btn btn-outline btn-xs sm:btn-sm text-red-500 w-2/5'>Delete</button>
                 </div>
             </div>
