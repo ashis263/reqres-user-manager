@@ -1,5 +1,7 @@
 import { useLoaderData, useNavigate } from "react-router-dom";
 import UpdatingForm from "../../components/UpdatingForm/UpdatingForm";
+import 'animate.css';
+import { Helmet } from "react-helmet-async";
 
 const EditUser = () => {
     const user = useLoaderData();
@@ -9,7 +11,10 @@ const EditUser = () => {
         navigate(-1);
     }
     return (
-        <div className="max-lg:py-10 lg:h-screen w-4/5 mx-auto flex flex-col gap-10 items-center justify-center">
+        <div className="animate__animated animate__fadeIn max-lg:py-10 lg:h-screen w-4/5 mx-auto flex flex-col gap-10 items-center justify-center">
+            <Helmet>
+                <title>Edit User</title>
+            </Helmet>
             <div className="w-full flex p-2 bg-white shadow rounded-lg">
                 <button onClick={handleBack} className="btn bg-teal-700 text-white btn-sm sm:btn-md">&lt; Go Back</button>
             </div>

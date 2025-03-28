@@ -3,6 +3,8 @@ import { AuthContext } from "../../providers/AuthProvider";
 import { Navigate } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import useAuth from "../../hooks/useAuth";
+import 'animate.css';
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const { isAuthenticated, setIsAuthenticated, Toast, setIsLoading } = useAuth();
@@ -30,15 +32,18 @@ const Login = () => {
                 }
                 setIsLoading(false);
             })
-            .catch(() => {
+            .catch(error => {
                 Toast.fire({
                     icon: 'error',
-                    title: 'Invalid credentials'
+                    title: error.message
                 });
             });
     }
     return (
-        <div className="flex justify-center items-center h-screen">
+        <div className="animate__animated animate__fadeIn flex justify-center items-center h-screen">
+            <Helmet>
+                <title>Login</title>
+            </Helmet>
             <div className="bg-white rounded-lg w-4/5 sm:w-1/2 lg:w-1/3 mx-auto p-10 shadow">
                 <div className="mt-5 mb-10 text-center">
                     <h1 className="text-teal-700 text-5xl font-bold">Login</h1>

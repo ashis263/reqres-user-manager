@@ -1,14 +1,19 @@
+import { Helmet } from 'react-helmet-async';
 import List from '../../components/List/List';
 import useAuth from '../../hooks/useAuth';
+import 'animate.css';
 
 const UserList = () => {
-    const { setIsAuthenticated  } = useAuth();
+    const { setIsAuthenticated } = useAuth();
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsAuthenticated(false);
     }
     return (
-        <div className="max-lg:py-10 lg:h-screen w-4/5 mx-auto flex flex-col gap-10 items-center justify-center">
+        <div className="animate__animated animate__fadeIn max-lg:py-10 lg:h-screen w-4/5 mx-auto flex flex-col gap-10 items-center justify-center">
+            <Helmet>
+                <title>User List</title>
+            </Helmet>
             <div className="w-full flex justify-end p-2 bg-white shadow rounded-lg">
                 <button onClick={handleLogout} className="btn bg-teal-700 text-white btn-sm sm:btn-md">Logout</button>
             </div>
