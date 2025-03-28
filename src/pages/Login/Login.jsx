@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
-import axiosPublic from "../../hooks/useAxiosPublic";
 import { AuthContext } from "../../providers/AuthProvider";
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const Login = () => {
     const { isAuthenticated, setIsAuthenticated, Toast, setIsLoading } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
+    const axiosPublic = useAxiosPublic();
 
     //if user is already authenticated, redirect to dashboard
     if (isAuthenticated) {
