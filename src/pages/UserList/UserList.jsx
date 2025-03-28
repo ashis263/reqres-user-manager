@@ -1,9 +1,8 @@
-import { AuthContext } from '../../providers/AuthProvider';
 import List from '../../components/List/List';
 import useAuth from '../../hooks/useAuth';
 
 const UserList = () => {
-    const { setIsAuthenticated } = useAuth();
+    const { setIsAuthenticated  } = useAuth();
     const handleLogout = () => {
         localStorage.removeItem('token');
         setIsAuthenticated(false);

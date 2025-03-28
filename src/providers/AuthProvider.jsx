@@ -7,6 +7,8 @@ const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState();
 
     useEffect(() => {
         //get token from local storage
@@ -42,7 +44,11 @@ const AuthProvider = ({ children }) => {
         isLoading,
         setIsLoading,
         users,
-        setUsers
+        setUsers,
+        currentPage,
+        setCurrentPage,
+        totalPages,
+        setTotalPages
     };
 
     return (

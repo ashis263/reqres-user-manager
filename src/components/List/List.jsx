@@ -2,16 +2,19 @@ import { useEffect } from 'react';
 import useAxiosPrivate from '../../hooks/useAxiosPrivate';
 import useAuth from '../../hooks/useAuth';
 import User from '../User/User';
+import Pagination from '../Pagination/Pagination';
 
 const List = () => {
-    const { users, setUsers, Toast } = useAuth()
+    const { users, setUsers, Toast, currentPage, setTotalPages } = useAuth();
     const axiosPrivate = useAxiosPrivate();
 
     useEffect(() => {
         //fetching users with axiosPrivate to prevent unauthorized data fetching
-        axiosPrivate.get('/api/users?page=1')
+        axiosPrivate.get(`/api/users?page=${currentPage}`)
             .then(response => {
                 setUsers(response.data.data);
+                //set total pages for pagination as it was on data
+                setTotalPages(response.data.total_pages);
             })
             .catch(() => {
                 Toast.fire({
@@ -19,7 +22,8 @@ const List = () => {
                     title: 'Error fetching users!'
                 });
             });
-    }, []);
+        //refetch users when currentPage changes
+    }, [currentPage]);
 
     return (
         <div>
@@ -31,6 +35,7 @@ const List = () => {
                     users.map(user => <User key={user.id} user={user} />)
                 }
             </div>
+            <Pagination />
         </div>
     );
 }
