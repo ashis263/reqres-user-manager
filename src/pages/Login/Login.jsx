@@ -1,27 +1,43 @@
 import { useForm } from "react-hook-form";
 import axiosPublic from "../../hooks/useAxiosPublic";
+import { AuthContext } from "../../providers/AuthProvider";
+import { useContext } from "react";
+import { Navigate } from "react-router-dom";
 
 const Login = () => {
+    const { isAuthenticated, setIsAuthenticated, Toast } = useContext(AuthContext);
     const { handleSubmit, register } = useForm();
+
+    //if user is already authenticated, redirect to dashboard
+    if(isAuthenticated) {
+        return <Navigate to="/dashboard" />;
+    }
 
     //login form submission
     const submitForm = (data) => {
         //post request to login with axios
-        //axiosPublic.post('api/login', data) // this is the original code
         axiosPublic.post('api/login', data)
             .then(response => {
                 if (response.status === 200) {
-                    //store token in local storage
+                    //store token in local storage and set isAuthenticated to true
                     localStorage.setItem('token', response.data.token);
+                    setIsAuthenticated(true);
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Login successful'
+                    });
                 }
             })
-            .catch(error => {
-                console.log(error.response.data);
+            .catch(() => {
+                Toast.fire({
+                    icon: 'error',
+                    title: 'Invalid credentials'
+                });
             });
     }
     return (
         <div className="flex justify-center items-center h-screen">
-            <div className="bg-white rounded-lg w-4/5 sm:w-1/2 lg:w-1/3 mx-auto p-5 shadow">
+            <div className="bg-white rounded-lg w-4/5 sm:w-1/2 lg:w-1/3 mx-auto p-10 shadow">
                 <div className="mt-5 mb-10 text-center">
                     <h1 className="text-teal-700 text-5xl font-bold">Login</h1>
                     <p className="text-gray-500 mt-1">Please login to continue</p>
