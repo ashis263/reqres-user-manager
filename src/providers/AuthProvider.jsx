@@ -7,6 +7,8 @@ const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [users, setUsers] = useState([]);
+    //another array of users just for search functionality
+    const [fetchedUsers, setFetchedUsers] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState();
 
@@ -48,7 +50,9 @@ const AuthProvider = ({ children }) => {
         currentPage,
         setCurrentPage,
         totalPages,
-        setTotalPages
+        setTotalPages,
+        fetchedUsers,
+        setFetchedUsers
     };
 
     return (
