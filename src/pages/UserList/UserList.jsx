@@ -10,7 +10,7 @@ const UserList = () => {
 
     //filter by searchkey
     useEffect(() => {
-        const filtered = fetchedUsers.filter(user => user.first_name.toLowerCase().includes(searchKey) | user.last_name.toLowerCase().includes(searchKey) )
+        const filtered = fetchedUsers.filter(user => user.first_name.toLowerCase().includes(searchKey.toLowerCase()) | user.last_name.toLowerCase().includes(searchKey.toLowerCase()) )
         setUsers(filtered);
     }, [searchKey])
 

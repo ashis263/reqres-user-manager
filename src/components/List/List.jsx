@@ -38,7 +38,7 @@ const List = () => {
                     :
                     //if no users avaiable after
                     <div className='flex justify-center items-center text-2xl text-red-500 text-center w-full'>
-                        <h1>No matched user in this page</h1>
+                        <h1>No user found in this page</h1>
                     </div>
                 }
             </div>

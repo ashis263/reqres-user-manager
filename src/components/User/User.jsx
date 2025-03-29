@@ -35,9 +35,9 @@ const User = ({ user }) => {
     }
 
     return (
-        <div data-aos="fade-in" data-aos-duration='1500' className='flex items-center space-x-4 p-3 bg-gray-100 justify-center rounded-md h-[calc((65vh-16px)/2)] lg:h-[calc((54vh-16px)/2)]'>
+        <div data-aos="fade-in" data-aos-duration='1500' className='flex items-center space-x-4 p-3 bg-gray-100 justify-center rounded-md h-[200px] lg:h-[calc((54vh-16px)/2)]'>
             {/* user avatar */}
-            <div className='w-1/2 aspect-square flex justify-center items-center'>
+            <div className='h-full aspect-square flex justify-center items-center'>
                 <img src={avatar} className='border w-full border-gray-400 rounded-sm' alt="user" />
             </div>
             {/* first and last name */}
